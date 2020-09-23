@@ -110,9 +110,17 @@ function GCodeRenderer() {
           newLine[prop] = self.lastLine[prop];
         }
       });
+      
+     
 
       // var color =  new THREE.Color(GCodeRenderer.feedColors[viewModel.code.index%GCodeRenderer.feedColors.length]);
-      var color =  GCodeRenderer.feedColors[viewModel.code.index%GCodeRenderer.feedColors.length];
+      var color =  GCodeRenderer.feedColors[0];
+      max_y = 30;
+      if ((newLine.y < max_y) && (self.lastLine.y < max_y)) {
+        color = GCodeRenderer.feedColors[1];
+      }
+
+
       var p1 = new THREE.Vector3(self.lastLine.x, self.lastLine.y, self.lastLine.z);
       var p2 = new THREE.Vector3(newLine.x, newLine.y, newLine.z);
 
@@ -165,15 +173,17 @@ function GCodeRenderer() {
 
 GCodeRenderer.motionColors = [ new THREE.Color(0xdddddd) ]
 GCodeRenderer.feedColors = [
-                             // new THREE.Color(0xffcc66), // canteloupe
-                             new THREE.Color(0x66ccff), // sky
-                             new THREE.Color(0x22bb22), // honeydew
-                             // new THREE.Color(0xff70cf), // carnation
-                             new THREE.Color(0xcc66ff), // lavender
-                             new THREE.Color(0xfffe66), // banana
-                             new THREE.Color(0xff6666) // salmon
-                             // new THREE.Color(0x66ffcc), // spindrift
-                             // new THREE.Color(0x66ff66), // flora
+                            new THREE.Color(0xeb6b34),  // orange
+                            new THREE.Color(0X7734eb)   // blue
+                            //  new THREE.Color(0xffcc66), // canteloupe
+                            //  new THREE.Color(0x66ccff), // sky
+                            //  new THREE.Color(0x22bb22), // honeydew
+                            //  new THREE.Color(0xff70cf), // carnation
+                            //  new THREE.Color(0xcc66ff), // lavender
+                            //  new THREE.Color(0xfffe66), // banana
+                            //  new THREE.Color(0xff6666) // salmon
+                            //  new THREE.Color(0x66ffcc), // spindrift
+                            //  new THREE.Color(0x66ff66), // flora
                            ]
 
 GCodeRenderer.prototype.absolute = function(v1, v2) {
